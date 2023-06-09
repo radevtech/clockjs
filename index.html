@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClockJS</title>
+    <style>
+        body{
+            background: linear-gradient(130deg,#3b7fff, #fff);
+            height: 90vh;
+        }
+        .container{
+            margin: auto;
+            width: 50%;
+        }
+        .clockWraper0 {
+            background-color: #CCC;
+            border: 1px solid;
+            border-radius: 40px;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.9),
+                        0 12px 25px 0 rgba(0,0,0,0.7);
+        }
+        .clockWraper {
+            background-color: #000;
+        }
+        #digitalTimer {
+            color: #fff;
+            font-size: 3rem;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        #secondsContainer{
+            color: #000;
+            font-size: 1.5rem;
+            text-align: center;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        .padContainer{
+            margin: auto;
+            width: 50%;
+            display: flex;
+            justify-content: space-between;
+            margin-top: -40px;
+        }
+        .leftPad, .rightPad{
+            width: 10px;
+            height: 1.3rem;
+            background-color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="clockWraper0">
+            <div class="clockWraper">
+                <p id="digitalTimer"></p>
+            </div>
+            <div class="padContainer">
+                <div class="leftPad"></div>
+                <div id="secondsContainer"></div>
+                <div class="rightPad"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let timer = document.querySelector('#digitalTimer');
+        let secondsContainer = document.querySelector('#secondsContainer');
+        setInterval(() => {
+            let seconds = verifyZero(new Date().getSeconds());
+            let minutes = verifyZero(new Date().getMinutes());
+            let hours = verifyZero(new Date().getHours());
+            timer.innerHTML = `${hours}:${minutes}`
+            secondsContainer.innerHTML = seconds
+        }, 1000)
+        let verifyZero = (digits) => digits < 10 ? '0'+digits : digits;
+    </script>
+</body>
+</html>
